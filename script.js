@@ -64,39 +64,20 @@ document.addEventListener('DOMContentLoaded', function () {
         function updateSliderPosition() {
             const visible = getVisibleCount();
             const dotCount = Math.ceil(total / visible);
-            
-            if (window.innerWidth <= 700) {
-                // Mobile: Hiển thị tất cả cards trong 1 hàng, chỉ highlight card active
-                list.style.transform = 'translateX(0)';
-                items.forEach((item, i) => {
-                    if (i === current) {
-                        item.classList.add('active-slide');
-                    } else {
-                        item.classList.remove('active-slide');
-                    }
-                });
-            } else {
-                // Desktop: Hiển thị 2 cards, trượt ngang
-                if (current > total - visible) current = 0;
-                list.style.transform = `translateX(-${(current / visible) * 100}%)`;
-                items.forEach((item, i) => {
-                    if (i >= current && i < current + visible) {
-                        item.classList.add('active-slide');
-                    } else {
-                        item.classList.remove('active-slide');
-                    }
-                });
-            }
-            
+            // Tính toán chỉ số hợp lệ
+            if (current > total - visible) current = 0;
+            // Hiệu ứng trượt
+            list.style.transform = `translateX(-${(current / visible) * 100}%)`;
+            // Quản lý class active-slide
+            items.forEach((item, i) => {
+                if (i >= current && i < current + visible) {
+                    item.classList.add('active-slide');
+                } else {
+                    item.classList.remove('active-slide');
+                }
+            });
             // Dots
-            let dotIdx;
-            if (window.innerWidth <= 700) {
-                // Mobile: dot active = current card
-                dotIdx = current;
-            } else {
-                // Desktop: dot active = current group
-                dotIdx = Math.floor(current / visible);
-            }
+            const dotIdx = Math.floor(current / visible);
             const dots = dotsContainer.querySelectorAll('button');
             dots.forEach((d, i) => d.classList.toggle('active', i === dotIdx));
             // Ẩn/hiện dots và nút nếu không đủ item
@@ -111,24 +92,12 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         function renderDots() {
-            let dotCount;
-            if (window.innerWidth <= 700) {
-                // Mobile: 1 dot cho mỗi card
-                dotCount = total;
-            } else {
-                // Desktop: 1 dot cho mỗi 2 cards
-                const visible = getVisibleCount();
-                dotCount = Math.ceil(total / visible);
-            }
-            
+            const visible = getVisibleCount();
+            const dotCount = Math.ceil(total / visible);
             dotsContainer.innerHTML = '';
             for (let i = 0; i < dotCount; i++) {
                 const btn = document.createElement('button');
-                if (window.innerWidth <= 700) {
-                    btn.addEventListener('click', () => goTo(i));
-                } else {
-                    btn.addEventListener('click', () => goTo(i * getVisibleCount()));
-                }
+                btn.addEventListener('click', () => goTo(i * visible));
                 dotsContainer.appendChild(btn);
             }
         }
@@ -138,27 +107,15 @@ document.addEventListener('DOMContentLoaded', function () {
             resetAutoSlide();
         }
         function next() {
-            if (window.innerWidth <= 700) {
-                // Mobile: chuyển từng card một
-                current = (current + 1) % total;
-            } else {
-                // Desktop: chuyển 2 cards
-                const visible = getVisibleCount();
-                current = (current + visible) % total;
-                if (current > total - visible) current = 0;
-            }
+            const visible = getVisibleCount();
+            current = (current + visible) % total;
+            if (current > total - visible) current = 0;
             updateSliderPosition();
         }
         function prev() {
-            if (window.innerWidth <= 700) {
-                // Mobile: chuyển từng card một
-                current = (current - 1 + total) % total;
-            } else {
-                // Desktop: chuyển 2 cards
-                const visible = getVisibleCount();
-                current = (current - visible + total) % total;
-                if (current < 0) current = total - visible;
-            }
+            const visible = getVisibleCount();
+            current = (current - visible + total) % total;
+            if (current < 0) current = total - visible;
             updateSliderPosition();
         }
         function resetAutoSlide() {
@@ -178,28 +135,4 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     initTestimonialCarousel();
-
-
-
-    // Scroll to Top Button
-    function initScrollToTop() {
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.add('visible');
-            } else {
-                scrollToTopBtn.classList.remove('visible');
-            }
-        });
-
-        scrollToTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-
-    initScrollToTop();
 });
