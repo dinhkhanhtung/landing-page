@@ -46,6 +46,18 @@ div, section, article, aside, nav, header, footer, main {
     overflow-x: hidden;
 }
 
+/* Cải thiện typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
 html {
     scroll-behavior: smooth;
 }
