@@ -307,4 +307,26 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     initBlogModal();
+
+    // Scroll to Top Button
+    function initScrollToTop() {
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    initScrollToTop();
 });
