@@ -206,23 +206,29 @@ document.addEventListener('DOMContentLoaded', function () {
     // FAQ Accordion
     function initFAQAccordion() {
         const faqItems = document.querySelectorAll('.faq-item');
+        console.log('FAQ Items found:', faqItems.length);
         
-        faqItems.forEach(item => {
+        faqItems.forEach((item, index) => {
             const question = item.querySelector('.faq-question');
+            console.log(`FAQ Item ${index}:`, item, 'Question:', question);
             
-            question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                
-                // Đóng tất cả FAQ items
-                faqItems.forEach(faqItem => {
-                    faqItem.classList.remove('active');
+            if (question) {
+                question.addEventListener('click', () => {
+                    console.log('FAQ clicked:', index);
+                    const isActive = item.classList.contains('active');
+                    
+                    // Đóng tất cả FAQ items
+                    faqItems.forEach(faqItem => {
+                        faqItem.classList.remove('active');
+                    });
+                    
+                    // Nếu item hiện tại chưa active, thì mở nó
+                    if (!isActive) {
+                        item.classList.add('active');
+                        console.log('FAQ opened:', index);
+                    }
                 });
-                
-                // Nếu item hiện tại chưa active, thì mở nó
-                if (!isActive) {
-                    item.classList.add('active');
-                }
-            });
+            }
         });
     }
     
