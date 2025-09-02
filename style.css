@@ -1300,6 +1300,7 @@ footer {
         width: 100%;
         min-width: 100%;
         max-width: 100%;
+        padding: 0 8px;
     }
 
     .testimonial-card.active+.testimonial-card {
@@ -1307,40 +1308,57 @@ footer {
     }
 
     .testimonials {
-        padding: 36px 0 20px 0;
+        padding: 30px 0 15px 0;
+    }
+
+    .testimonials-title {
+        font-size: 1.6rem;
+        margin-bottom: 24px;
     }
 
     .testimonial-avatar {
-        width: 48px;
-        height: 48px;
+        width: 40px;
+        height: 40px;
+        margin-bottom: 12px;
     }
 
     .testimonial-arrow {
-        width: 28px;
-        height: 28px;
-        font-size: 1rem;
-    }
-
-    .testimonial-content p {
-        font-size: 0.95rem;
-        line-height: 1.4;
-    }
-
-    .testimonial-name {
+        width: 24px;
+        height: 24px;
         font-size: 0.9rem;
     }
 
-    .testimonial-role {
+    .testimonial-content p {
+        font-size: 0.9rem;
+        line-height: 1.3;
+        margin-bottom: 10px;
+    }
+
+    .testimonial-name {
         font-size: 0.85rem;
     }
 
+    .testimonial-role {
+        font-size: 0.8rem;
+    }
+
     .testimonial-carousel {
-        padding: 24px 12px 40px 12px;
+        padding: 20px 8px 30px 8px;
+        max-width: 95vw;
     }
 
     .testimonial-list {
         flex-direction: row;
         align-items: center;
+    }
+
+    .testimonial-dots {
+        bottom: 12px;
+    }
+
+    .testimonial-dots button {
+        width: 12px;
+        height: 12px;
     }
 }
 
