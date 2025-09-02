@@ -1090,15 +1090,6 @@ footer {
     flex-direction: column;
     align-items: center;
     margin-bottom: 18px;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
-}
-
-.blog-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(30, 136, 229, 0.15);
 }
 
 .blog-item img {
@@ -1310,6 +1301,8 @@ footer {
     z-index: 2000;
 }
 
+
+
 .modal-overlay.active {
     opacity: 1;
     visibility: visible;
@@ -1385,64 +1378,7 @@ footer {
     }
 }
 
-/* Blog Modal */
-.blog-modal-content {
-    max-width: 800px;
-    max-height: 90vh;
-    overflow-y: auto;
-}
 
-.blog-modal-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.blog-modal-img {
-    width: 100%;
-    max-width: 400px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 16px;
-}
-
-.blog-modal-header h3 {
-    color: var(--primary);
-    font-size: 1.5rem;
-    margin-bottom: 0;
-}
-
-.blog-modal-body {
-    margin-bottom: 20px;
-    line-height: 1.6;
-}
-
-.blog-modal-body h4 {
-    color: var(--secondary);
-    margin: 20px 0 10px 0;
-    font-size: 1.2rem;
-}
-
-.blog-modal-body p {
-    margin-bottom: 15px;
-    color: #444;
-}
-
-.blog-modal-body ul {
-    margin: 15px 0;
-    padding-left: 20px;
-}
-
-.blog-modal-body li {
-    margin-bottom: 8px;
-    color: #444;
-}
-
-.blog-modal-footer {
-    text-align: center;
-    border-top: 1px solid #eee;
-    padding-top: 16px;
-}
 
 @media (max-width: 900px) {
     .testimonial-carousel {
