@@ -21,6 +21,10 @@ html, body {
     width: 100%;
 }
 
+body {
+    overflow-y: auto;
+}
+
 section {
     width: 100%;
     box-sizing: border-box;
@@ -610,6 +614,8 @@ footer {
     max-width: 240px;
     text-align: center;
     flex: 1 1 200px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .step-icon {
@@ -841,11 +847,15 @@ footer {
     .workflow-steps {
         flex-direction: column;
         align-items: center;
+        gap: 20px;
+        padding: 0 16px;
     }
 
     .step {
         max-width: 100%;
         width: 100%;
+        padding: 24px 16px;
+        margin: 0;
     }
 }
 
@@ -1080,7 +1090,7 @@ footer {
 
 /* Sticky CTA */
 .sticky-cta {
-    position: fixed;
+    position: fixed !important;
     right: 24px;
     bottom: 28px;
     background: var(--accent);
@@ -1089,13 +1099,15 @@ footer {
     padding: 14px 26px;
     border-radius: 30px;
     box-shadow: 0 4px 16px rgba(30, 136, 229, 0.18);
-    z-index: 999;
+    z-index: 9999 !important;
     text-decoration: none;
     font-size: 1.1rem;
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: 10px;
     transition: background 0.2s, transform 0.2s;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .sticky-cta:hover {
@@ -1131,7 +1143,7 @@ footer {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    z-index: 998;
+    z-index: 9998;
     box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
 }
 
@@ -1181,12 +1193,19 @@ footer {
     background: var(--white);
     border-radius: 14px;
     box-shadow: 0 2px 12px rgba(30, 136, 229, 0.08);
-    padding: 0 0 18px 0;
-    text-align: left;
+    padding: 0 0 24px 0;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 18px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.blog-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(30, 136, 229, 0.15);
 }
 
 .blog-item img {
@@ -1211,34 +1230,41 @@ footer {
 
 .blog-item h4 {
     color: var(--secondary);
-    margin: 10px 0 8px 0;
+    margin: 16px 16px 12px 16px;
     font-size: 1.1rem;
     text-align: center;
+    line-height: 1.4;
+    font-weight: 600;
 }
 
 .blog-item p {
     color: #444;
-    font-size: 0.98rem;
-    margin-bottom: 10px;
+    font-size: 0.95rem;
+    margin: 0 16px 16px 16px;
     text-align: center;
+    line-height: 1.5;
 }
 
 .blog-link {
     color: var(--primary);
     font-weight: 600;
     text-decoration: none;
-    transition: color 0.2s;
+    transition: all 0.3s ease;
     background: var(--bg);
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 10px 20px;
+    border-radius: 25px;
     border: 2px solid var(--primary);
-    margin-top: 8px;
+    margin-top: 12px;
     display: inline-block;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 8px rgba(30, 136, 229, 0.1);
 }
 
 .blog-link:hover {
     color: var(--white);
     background: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.2);
 }
 
 /* Mobile responsive */
@@ -1480,14 +1506,14 @@ footer {
 
 @media (max-width: 700px) {
     .testimonial-card {
-        width: 25%;
-        min-width: 25%;
-        max-width: 25%;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
         flex-shrink: 0;
     }
 
     .testimonial-card:not(.active-slide) {
-        opacity: 0.3;
+        display: none;
     }
 
     .testimonials {
@@ -1495,8 +1521,21 @@ footer {
     }
 
     .testimonial-avatar {
-        width: 48px;
-        height: 48px;
+        width: 60px;
+        height: 60px;
+    }
+    
+    .testimonial-content p {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+    
+    .testimonial-name {
+        font-size: 1rem;
+    }
+    
+    .testimonial-role {
+        font-size: 0.9rem;
     }
 
     .testimonial-arrow {
@@ -1507,5 +1546,10 @@ footer {
 
     .testimonial-carousel {
         padding: 24px 12px 40px 12px;
+        max-width: 100%;
+    }
+    
+    .testimonial-list {
+        justify-content: center;
     }
 }
