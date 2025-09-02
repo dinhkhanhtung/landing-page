@@ -451,18 +451,18 @@ footer {
 }
 
 .nav-cta {
-    background: transparent;
-    color: var(--text) !important;
-    font-weight: 500;
-    border-radius: 6px;
-    padding: 6px 10px;
+    background: var(--accent);
+    color: var(--white) !important;
+    font-weight: 700;
+    border-radius: 20px;
+    padding: 6px 18px;
     margin-left: 8px;
-    transition: background 0.15s, color 0.15s;
+    transition: background 0.2s;
 }
 
-.nav-cta:hover {
-    background: var(--primary);
-    color: var(--white) !important;
+.nav-cta:hover,
+.nav-cta.active {
+    background: #388e3c;
 }
 
 @media (max-width: 800px) {

@@ -45,6 +45,31 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Active menu navigation
+    function updateActiveMenu() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.main-nav a');
+        
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveMenu);
+    updateActiveMenu();
+
     // Testimonials Carousel/Slider JS - Hiển thị 2 đánh giá trên desktop, 1 trên mobile
     function initTestimonialCarousel() {
         const slider = document.querySelector('.testimonial-carousel');
