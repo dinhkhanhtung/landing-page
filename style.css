@@ -451,8 +451,8 @@ footer {
 }
 
 .nav-cta {
-    background: var(--primary);
-    color: var(--white) !important;
+    background: transparent;
+    color: var(--text) !important;
     font-weight: 500;
     border-radius: 6px;
     padding: 6px 10px;
@@ -461,7 +461,8 @@ footer {
 }
 
 .nav-cta:hover {
-    background: var(--secondary);
+    background: var(--primary);
+    color: var(--white) !important;
 }
 
 @media (max-width: 800px) {
