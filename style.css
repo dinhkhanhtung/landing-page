@@ -477,7 +477,8 @@ footer {
 
 @media (max-width: 600px) {
     .main-header {
-        position: static;
+        position: sticky;
+        top: 0;
     }
 
     .nav-container {
