@@ -991,10 +991,11 @@ footer {
 }
 
 .blog-list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 32px;
-    justify-content: center;
-    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .blog-item {
@@ -1002,13 +1003,20 @@ footer {
     border-radius: 14px;
     box-shadow: 0 2px 12px rgba(30, 136, 229, 0.08);
     padding: 0 0 18px 0;
-    min-width: 260px;
-    max-width: 320px;
     text-align: left;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 18px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(30, 136, 229, 0.15);
 }
 
 .blog-item img {
@@ -1050,10 +1058,30 @@ footer {
     font-weight: 600;
     text-decoration: none;
     transition: color 0.2s;
+    background: var(--bg);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 2px solid var(--primary);
+    margin-top: 8px;
+    display: inline-block;
 }
 
 .blog-link:hover {
-    color: var(--accent);
+    color: var(--white);
+    background: var(--primary);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .blog-list {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 16px;
+    }
+    
+    .blog-item {
+        margin-bottom: 0;
+    }
 }
 
 /* Testimonials Carousel/Slider - Hiển thị 2 đánh giá trên desktop, 1 trên mobile */

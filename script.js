@@ -280,9 +280,20 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Event listeners
+        const blogItems = document.querySelectorAll('.blog-item');
+        
+        blogItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const blogId = this.getAttribute('data-blog');
+                showBlogModal(blogId);
+            });
+        });
+
         blogLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation(); // Ngăn event bubbling
                 const blogId = this.getAttribute('data-blog');
                 showBlogModal(blogId);
             });
