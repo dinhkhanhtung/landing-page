@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Tính toán chỉ số hợp lệ
             if (current > total - visible) current = 0;
             // Hiệu ứng trượt
-            list.style.transform = `translateX(-${(current / visible) * 100}%)`;
+            list.style.transform = `translateX(-${(current / total) * 100}%)`;
             // Quản lý class active-slide
             items.forEach((item, i) => {
                 if (i >= current && i < current + visible) {
@@ -109,13 +109,11 @@ document.addEventListener('DOMContentLoaded', function () {
         function next() {
             const visible = getVisibleCount();
             current = (current + visible) % total;
-            if (current > total - visible) current = 0;
             updateSliderPosition();
         }
         function prev() {
             const visible = getVisibleCount();
             current = (current - visible + total) % total;
-            if (current < 0) current = total - visible;
             updateSliderPosition();
         }
         function resetAutoSlide() {
