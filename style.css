@@ -21,10 +21,6 @@ html, body {
     width: 100%;
 }
 
-body {
-    overflow-y: auto;
-}
-
 section {
     width: 100%;
     box-sizing: border-box;
@@ -154,12 +150,10 @@ body {
 
 .services-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
     width: 100%;
     overflow-x: hidden;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .service-card {
@@ -562,8 +556,7 @@ footer {
 
 @media (max-width: 600px) {
     .main-header {
-        position: sticky;
-        top: 0;
+        position: static;
     }
 
     .nav-container {
@@ -617,8 +610,6 @@ footer {
     max-width: 240px;
     text-align: center;
     flex: 1 1 200px;
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .step-icon {
@@ -839,8 +830,7 @@ footer {
 
 @media (max-width: 900px) {
     .services-list {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
+        grid-template-columns: 1fr 1fr;
     }
 
     .testimonial-list {
@@ -851,15 +841,11 @@ footer {
     .workflow-steps {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
-        padding: 0 16px;
     }
 
     .step {
         max-width: 100%;
         width: 100%;
-        padding: 24px 16px;
-        margin: 0;
     }
 }
 
@@ -879,7 +865,6 @@ footer {
 
     .services-list {
         grid-template-columns: 1fr;
-        gap: 16px;
     }
 
     .why-choose,
@@ -1095,7 +1080,7 @@ footer {
 
 /* Sticky CTA */
 .sticky-cta {
-    position: fixed !important;
+    position: fixed;
     right: 24px;
     bottom: 28px;
     background: var(--accent);
@@ -1104,15 +1089,13 @@ footer {
     padding: 14px 26px;
     border-radius: 30px;
     box-shadow: 0 4px 16px rgba(30, 136, 229, 0.18);
-    z-index: 9999 !important;
+    z-index: 999;
     text-decoration: none;
     font-size: 1.1rem;
-    display: flex !important;
+    display: flex;
     align-items: center;
     gap: 10px;
     transition: background 0.2s, transform 0.2s;
-    visibility: visible !important;
-    opacity: 1 !important;
 }
 
 .sticky-cta:hover {
@@ -1148,7 +1131,7 @@ footer {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    z-index: 9998;
+    z-index: 998;
     box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
 }
 
@@ -1198,19 +1181,12 @@ footer {
     background: var(--white);
     border-radius: 14px;
     box-shadow: 0 2px 12px rgba(30, 136, 229, 0.08);
-    padding: 0 0 24px 0;
-    text-align: center;
+    padding: 0 0 18px 0;
+    text-align: left;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 18px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-}
-
-.blog-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(30, 136, 229, 0.15);
 }
 
 .blog-item img {
@@ -1235,41 +1211,34 @@ footer {
 
 .blog-item h4 {
     color: var(--secondary);
-    margin: 16px 16px 12px 16px;
+    margin: 10px 0 8px 0;
     font-size: 1.1rem;
     text-align: center;
-    line-height: 1.4;
-    font-weight: 600;
 }
 
 .blog-item p {
     color: #444;
-    font-size: 0.95rem;
-    margin: 0 16px 16px 16px;
+    font-size: 0.98rem;
+    margin-bottom: 10px;
     text-align: center;
-    line-height: 1.5;
 }
 
 .blog-link {
     color: var(--primary);
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: color 0.2s;
     background: var(--bg);
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 8px 16px;
+    border-radius: 20px;
     border: 2px solid var(--primary);
-    margin-top: 12px;
+    margin-top: 8px;
     display: inline-block;
-    font-size: 0.95rem;
-    box-shadow: 0 2px 8px rgba(30, 136, 229, 0.1);
 }
 
 .blog-link:hover {
     color: var(--white);
     background: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.2);
 }
 
 /* Mobile responsive */
@@ -1511,14 +1480,14 @@ footer {
 
 @media (max-width: 700px) {
     .testimonial-card {
-        width: 100%;
-        min-width: 100%;
-        max-width: 100%;
+        width: 25%;
+        min-width: 25%;
+        max-width: 25%;
         flex-shrink: 0;
     }
 
     .testimonial-card:not(.active-slide) {
-        display: none;
+        opacity: 0.3;
     }
 
     .testimonials {
@@ -1526,21 +1495,8 @@ footer {
     }
 
     .testimonial-avatar {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .testimonial-content p {
-        font-size: 1rem;
-        margin-bottom: 12px;
-    }
-    
-    .testimonial-name {
-        font-size: 1rem;
-    }
-    
-    .testimonial-role {
-        font-size: 0.9rem;
+        width: 48px;
+        height: 48px;
     }
 
     .testimonial-arrow {
@@ -1551,10 +1507,5 @@ footer {
 
     .testimonial-carousel {
         padding: 24px 12px 40px 12px;
-        max-width: 100%;
-    }
-    
-    .testimonial-list {
-        justify-content: center;
     }
 }
