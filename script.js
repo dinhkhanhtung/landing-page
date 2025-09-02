@@ -202,4 +202,29 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     initScrollToTop();
+
+    // FAQ Accordion
+    function initFAQAccordion() {
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Đóng tất cả FAQ items
+                faqItems.forEach(faqItem => {
+                    faqItem.classList.remove('active');
+                });
+                
+                // Nếu item hiện tại chưa active, thì mở nó
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    }
+    
+    initFAQAccordion();
 });
