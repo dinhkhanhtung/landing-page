@@ -1312,6 +1312,28 @@ footer {
         height: 28px;
         font-size: 1rem;
     }
+
+    .testimonial-content p {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+
+    .testimonial-name {
+        font-size: 0.9rem;
+    }
+
+    .testimonial-role {
+        font-size: 0.85rem;
+    }
+
+    .testimonial-carousel {
+        padding: 24px 12px 40px 12px;
+    }
+
+    .testimonial-list {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 
