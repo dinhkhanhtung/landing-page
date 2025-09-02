@@ -67,6 +67,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Smooth scroll for navigation links
+    document.querySelectorAll('.main-nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Update active state after scroll
+                setTimeout(() => {
+                    updateActiveMenu();
+                }, 100);
+            }
+        });
+    });
+
     window.addEventListener('scroll', updateActiveMenu);
     updateActiveMenu();
 
