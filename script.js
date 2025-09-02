@@ -64,20 +64,39 @@ document.addEventListener('DOMContentLoaded', function () {
         function updateSliderPosition() {
             const visible = getVisibleCount();
             const dotCount = Math.ceil(total / visible);
-            // Tính toán chỉ số hợp lệ
-            if (current > total - visible) current = 0;
-            // Hiệu ứng trượt
-            list.style.transform = `translateX(-${(current / visible) * 100}%)`;
-            // Quản lý class active-slide
-            items.forEach((item, i) => {
-                if (i >= current && i < current + visible) {
-                    item.classList.add('active-slide');
-                } else {
-                    item.classList.remove('active-slide');
-                }
-            });
+            
+            if (window.innerWidth <= 700) {
+                // Mobile: Hiển thị tất cả cards trong 1 hàng, chỉ highlight card active
+                list.style.transform = 'translateX(0)';
+                items.forEach((item, i) => {
+                    if (i === current) {
+                        item.classList.add('active-slide');
+                    } else {
+                        item.classList.remove('active-slide');
+                    }
+                });
+            } else {
+                // Desktop: Hiển thị 2 cards, trượt ngang
+                if (current > total - visible) current = 0;
+                list.style.transform = `translateX(-${(current / visible) * 100}%)`;
+                items.forEach((item, i) => {
+                    if (i >= current && i < current + visible) {
+                        item.classList.add('active-slide');
+                    } else {
+                        item.classList.remove('active-slide');
+                    }
+                });
+            }
+            
             // Dots
-            const dotIdx = Math.floor(current / visible);
+            let dotIdx;
+            if (window.innerWidth <= 700) {
+                // Mobile: dot active = current card
+                dotIdx = current;
+            } else {
+                // Desktop: dot active = current group
+                dotIdx = Math.floor(current / visible);
+            }
             const dots = dotsContainer.querySelectorAll('button');
             dots.forEach((d, i) => d.classList.toggle('active', i === dotIdx));
             // Ẩn/hiện dots và nút nếu không đủ item
@@ -92,12 +111,24 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         function renderDots() {
-            const visible = getVisibleCount();
-            const dotCount = Math.ceil(total / visible);
+            let dotCount;
+            if (window.innerWidth <= 700) {
+                // Mobile: 1 dot cho mỗi card
+                dotCount = total;
+            } else {
+                // Desktop: 1 dot cho mỗi 2 cards
+                const visible = getVisibleCount();
+                dotCount = Math.ceil(total / visible);
+            }
+            
             dotsContainer.innerHTML = '';
             for (let i = 0; i < dotCount; i++) {
                 const btn = document.createElement('button');
-                btn.addEventListener('click', () => goTo(i * visible));
+                if (window.innerWidth <= 700) {
+                    btn.addEventListener('click', () => goTo(i));
+                } else {
+                    btn.addEventListener('click', () => goTo(i * getVisibleCount()));
+                }
                 dotsContainer.appendChild(btn);
             }
         }
@@ -107,15 +138,27 @@ document.addEventListener('DOMContentLoaded', function () {
             resetAutoSlide();
         }
         function next() {
-            const visible = getVisibleCount();
-            current = (current + visible) % total;
-            if (current > total - visible) current = 0;
+            if (window.innerWidth <= 700) {
+                // Mobile: chuyển từng card một
+                current = (current + 1) % total;
+            } else {
+                // Desktop: chuyển 2 cards
+                const visible = getVisibleCount();
+                current = (current + visible) % total;
+                if (current > total - visible) current = 0;
+            }
             updateSliderPosition();
         }
         function prev() {
-            const visible = getVisibleCount();
-            current = (current - visible + total) % total;
-            if (current < 0) current = total - visible;
+            if (window.innerWidth <= 700) {
+                // Mobile: chuyển từng card một
+                current = (current - 1 + total) % total;
+            } else {
+                // Desktop: chuyển 2 cards
+                const visible = getVisibleCount();
+                current = (current - visible + total) % total;
+                if (current < 0) current = total - visible;
+            }
             updateSliderPosition();
         }
         function resetAutoSlide() {
