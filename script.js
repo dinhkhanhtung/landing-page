@@ -124,7 +124,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Event listeners
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close menu when clicking on overlay
+        mobileMenuOverlay.addEventListener('click', function(e) {
+            if (e.target === mobileMenuOverlay) {
+                closeMobileMenu();
+            }
+        });
 
         // Close menu when clicking on nav links
         mobileNavLinks.forEach(link => {
@@ -143,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 block: 'start'
                             });
                             updateActiveMenu();
-                        }, 300);
+                        }, 350); // Increased delay to ensure menu closes first
                     }
                 } else {
                     // For non-hash links, just close the menu
@@ -161,10 +167,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Close menu on window resize if it gets too wide
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 800 && mobileMenu.classList.contains('active')) {
+            if (window.innerWidth > 900 && mobileMenu.classList.contains('active')) {
                 closeMobileMenu();
             }
         });
+
+        // Prevent body scroll when menu is open
+        function handleBodyScroll() {
+            if (mobileMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.width = '100%';
+            } else {
+                document.body.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.width = '';
+            }
+        }
+
+        // Update body scroll when menu state changes
+        mobileMenu.addEventListener('transitionstart', handleBodyScroll);
     }
     initMobileMenu();
 
