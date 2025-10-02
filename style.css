@@ -2412,6 +2412,10 @@ html {
         font-size: 1.2rem;
     }
 
+    .office-info {
+        margin-bottom: 20px;
+    }
+
     .office-info p {
         font-size: 0.95rem;
     }
@@ -2454,6 +2458,10 @@ html {
 
     .office-header h3 {
         font-size: 1.1rem;
+    }
+
+    .office-info {
+        margin-bottom: 20px;
     }
 
     .office-info p {
