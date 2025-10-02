@@ -112,14 +112,14 @@ document.addEventListener('DOMContentLoaded', function () {
             mobileMenuBtn.classList.add('active');
             mobileMenuOverlay.classList.add('active');
             mobileMenu.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            document.body.classList.add('mobile-menu-open');
         }
 
         function closeMobileMenu() {
             mobileMenuBtn.classList.remove('active');
             mobileMenuOverlay.classList.remove('active');
             mobileMenu.classList.remove('active');
-            document.body.style.overflow = '';
+            document.body.classList.remove('mobile-menu-open');
         }
 
         // Event listeners
@@ -324,45 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     updateCopyright();
 
-    // Social Sharing with Avatar
-    function initSocialSharing() {
-        const shareUrl = window.location.href;
-        const shareTitle = document.title;
-        const shareDescription = document.querySelector('meta[name="description"]')?.content || '';
-        const avatarUrl = window.location.origin + '/avatar.jpg';
-
-        // Add social sharing buttons to contact section
-        const contactSection = document.querySelector('.contact');
-        if (contactSection) {
-            const socialShareHtml = `
-                <div class="social-share" style="margin-top: 40px; text-align: center; border-top: 1px solid var(--gray-light); padding-top: 30px;">
-                    <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.2rem;">Chia sẻ trang này</h3>
-                    <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareTitle)}"
-                           target="_blank" class="social-btn facebook"
-                           style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: #1877f2; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">
-                            <img src="${avatarUrl}" alt="Avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;">
-                            <i class="fab fa-facebook"></i> Facebook
-                        </a>
-                        <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareTitle)}"
-                           target="_blank" class="social-btn twitter"
-                           style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: #1da1f2; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">
-                            <img src="${avatarUrl}" alt="Avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;">
-                            <i class="fab fa-twitter"></i> Twitter
-                        </a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}"
-                           target="_blank" class="social-btn linkedin"
-                           style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: #0077b5; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">
-                            <img src="${avatarUrl}" alt="Avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                    </div>
-                </div>
-            `;
-            contactSection.insertAdjacentHTML('beforeend', socialShareHtml);
-        }
-    }
-    initSocialSharing();
+    // Social Sharing removed as requested
 
     // Smooth scrolling for all anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
