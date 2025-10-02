@@ -637,10 +637,12 @@ footer .container {
 
     /* Prevent horizontal scroll when mobile menu is open */
     body.mobile-menu-open {
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        max-width: 100%;
+        overflow: hidden !important;
+        position: fixed !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        left: 0 !important;
+        top: 0 !important;
     }
 }
 
@@ -674,6 +676,8 @@ footer .container {
     left: 0;
     right: 0;
     bottom: 0;
+    width: 100vw;
+    height: 100vh;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(3px);
     opacity: 0;
@@ -681,6 +685,7 @@ footer .container {
     transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 98;
     display: none;
+    overflow: hidden;
 }
 
 .mobile-menu-overlay.active {
@@ -691,8 +696,9 @@ footer .container {
 
 /* Ensure no horizontal scroll on mobile */
 html, body {
-    overflow-x: hidden;
-    max-width: 100%;
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
     box-sizing: border-box;
 }
 
