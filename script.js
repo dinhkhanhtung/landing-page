@@ -54,7 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            if (scrollY >= (sectionTop - 200)) {
+            // Adjust offset for fixed header on mobile
+            const isMobile = window.innerWidth <= 900;
+            const headerOffset = isMobile ? 120 : 200;
+            if (scrollY >= (sectionTop - headerOffset)) {
                 current = section.getAttribute('id');
             }
         });
@@ -73,9 +76,14 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                // Calculate offset for fixed header on mobile
+                const isMobile = window.innerWidth <= 900;
+                const headerOffset = isMobile ? 80 : 0;
+                const elementPosition = target.offsetTop - headerOffset;
+
+                window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
                 });
 
                 // Update active state after scroll
@@ -184,9 +192,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (target) {
                         closeMobileNav();
                         setTimeout(() => {
-                            target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
+                            // Calculate offset for fixed header on mobile
+                            const headerOffset = 80;
+                            const elementPosition = target.offsetTop - headerOffset;
+
+                            window.scrollTo({
+                                top: elementPosition,
+                                behavior: 'smooth'
                             });
                             updateActiveMenu();
                         }, 150);
@@ -450,9 +462,14 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                // Calculate offset for fixed header on mobile
+                const isMobile = window.innerWidth <= 900;
+                const headerOffset = isMobile ? 80 : 0;
+                const elementPosition = target.offsetTop - headerOffset;
+
+                window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
                 });
             }
         });
