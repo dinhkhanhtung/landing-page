@@ -606,6 +606,10 @@ footer .container {
     .nav-container {
         padding: 8px 0;
     }
+
+    .mobile-menu-btn {
+        display: flex !important;
+    }
 }
 
 /* Mobile Menu Styles */
@@ -618,6 +622,13 @@ footer .container {
     padding: 8px;
     gap: 4px;
     z-index: 101;
+}
+
+/* Show hamburger menu on tablet and mobile */
+@media (max-width: 900px) {
+    .mobile-menu-btn {
+        display: flex !important;
+    }
 }
 
 .mobile-menu-btn span {
