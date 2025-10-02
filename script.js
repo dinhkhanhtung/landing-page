@@ -111,8 +111,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function openMobileMenu() {
             mobileMenuBtn.classList.add('active');
+            mobileMenu.style.display = 'block'; // Show menu first
             mobileMenuOverlay.style.display = 'block';
-            mobileMenu.classList.add('active');
+            
+            // Small delay to ensure display is applied before adding active class
+            setTimeout(() => {
+                mobileMenu.classList.add('active');
+                mobileMenuOverlay.classList.add('active');
+            }, 10);
+            
             document.body.classList.add('mobile-menu-open');
 
             // Prevent body scroll
@@ -121,9 +128,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function closeMobileMenu() {
             mobileMenuBtn.classList.remove('active');
-            mobileMenuOverlay.style.display = 'none';
+            mobileMenuOverlay.classList.remove('active');
             mobileMenu.classList.remove('active');
             document.body.classList.remove('mobile-menu-open');
+
+            // Hide menu after animation completes
+            setTimeout(() => {
+                mobileMenuOverlay.style.display = 'none';
+                mobileMenu.style.display = 'none';
+            }, 300);
 
             // Restore body scroll
             document.body.style.overflow = '';
