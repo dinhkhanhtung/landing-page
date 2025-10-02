@@ -206,31 +206,41 @@ document.addEventListener('DOMContentLoaded', function () {
         function updateSliderPosition() {
             const visible = getVisibleCount();
             const dotCount = Math.ceil(total / visible);
+
             // Tính toán chỉ số hợp lệ
-            if (current > total - visible) current = 0;
-            // Hiệu ứng trượt
-            list.style.transform = `translateX(-${(current / total) * 100}%)`;
+            if (current >= total) current = 0;
+            if (current < 0) current = total - visible;
+
+            // Hiệu ứng trượt - sửa công thức tính toán
+            const translatePercent = (current * 100) / visible;
+            list.style.transform = `translateX(-${translatePercent}%)`;
+
             // Quản lý class active-slide
             items.forEach((item, i) => {
-                if (i >= current && i < current + visible) {
-                    item.classList.add('active-slide');
-                } else {
-                    item.classList.remove('active-slide');
-                }
+                item.classList.remove('active-slide');
             });
+
+            // Thêm class active cho các item hiển thị
+            for (let i = current; i < current + visible && i < total; i++) {
+                if (items[i]) {
+                    items[i].classList.add('active-slide');
+                }
+            }
+
             // Dots
             const dotIdx = Math.floor(current / visible);
             const dots = dotsContainer.querySelectorAll('button');
             dots.forEach((d, i) => d.classList.toggle('active', i === dotIdx));
+
             // Ẩn/hiện dots và nút nếu không đủ item
             if (dotCount <= 1) {
                 dotsContainer.style.display = 'none';
-                leftBtn.style.display = 'none';
-                rightBtn.style.display = 'none';
+                if (leftBtn) leftBtn.style.display = 'none';
+                if (rightBtn) rightBtn.style.display = 'none';
             } else {
                 dotsContainer.style.display = '';
-                leftBtn.style.display = '';
-                rightBtn.style.display = '';
+                if (leftBtn) leftBtn.style.display = '';
+                if (rightBtn) rightBtn.style.display = '';
             }
         }
         function renderDots() {
@@ -250,12 +260,18 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         function next() {
             const visible = getVisibleCount();
-            current = (current + visible) % total;
+            current += visible;
+            if (current >= total) {
+                current = 0;
+            }
             updateSliderPosition();
         }
         function prev() {
             const visible = getVisibleCount();
-            current = (current - visible + total) % total;
+            current -= visible;
+            if (current < 0) {
+                current = Math.max(0, total - visible);
+            }
             updateSliderPosition();
         }
         function resetAutoSlide() {
