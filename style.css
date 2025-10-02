@@ -2003,6 +2003,10 @@ html {
     border-color: var(--primary-light);
 }
 
+.office-card:hover .office-info {
+    margin-bottom: 36px;
+}
+
 .office-header {
     display: flex;
     align-items: center;
@@ -2024,7 +2028,7 @@ html {
 }
 
 .office-info {
-    margin-bottom: 24px;
+    margin-bottom: 32px;
 }
 
 .office-info p {
