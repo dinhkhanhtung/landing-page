@@ -89,13 +89,17 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', updateActiveMenu);
     updateActiveMenu();
 
-    // New Simple Mobile Navigation
+    // Enhanced Mobile Navigation with Swipe Support
     function initMobileNav() {
         const mobileToggle = document.getElementById('mobileNavToggle');
         const mobileNav = document.getElementById('mobileNav');
         const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
         if (!mobileToggle || !mobileNav) return;
+
+        let touchStartY = 0;
+        let touchStartX = 0;
+        let isSwiping = false;
 
         // Toggle mobile navigation
         function toggleMobileNav() {
@@ -111,6 +115,14 @@ document.addEventListener('DOMContentLoaded', function () {
         function openMobileNav() {
             mobileToggle.classList.add('active');
             mobileNav.classList.add('active');
+            // Add smooth entrance animation
+            mobileNav.style.transform = 'translateY(-10px)';
+            mobileNav.style.opacity = '0';
+
+            requestAnimationFrame(() => {
+                mobileNav.style.transform = 'translateY(0)';
+                mobileNav.style.opacity = '1';
+            });
         }
 
         function closeMobileNav() {
@@ -118,8 +130,47 @@ document.addEventListener('DOMContentLoaded', function () {
             mobileNav.classList.remove('active');
         }
 
+        // Touch/Swipe Events for mobile
+        function handleTouchStart(e) {
+            if (!mobileNav.classList.contains('active')) return;
+
+            touchStartY = e.touches[0].clientY;
+            touchStartX = e.touches[0].clientX;
+            isSwiping = false;
+        }
+
+        function handleTouchMove(e) {
+            if (!mobileNav.classList.contains('active') || !touchStartY) return;
+
+            const touchY = e.touches[0].clientY;
+            const touchX = e.touches[0].clientX;
+            const deltaY = touchStartY - touchY;
+            const deltaX = Math.abs(touchStartX - touchX);
+
+            // Check if it's a vertical swipe (not horizontal)
+            if (Math.abs(deltaY) > 10 && deltaX < 50) {
+                isSwiping = true;
+
+                // Swipe up to close
+                if (deltaY > 30) {
+                    closeMobileNav();
+                }
+            }
+        }
+
+        function handleTouchEnd(e) {
+            touchStartY = 0;
+            touchStartX = 0;
+            isSwiping = false;
+        }
+
         // Event listeners
         mobileToggle.addEventListener('click', toggleMobileNav);
+
+        // Touch events for swipe
+        mobileNav.addEventListener('touchstart', handleTouchStart, { passive: true });
+        mobileNav.addEventListener('touchmove', handleTouchMove, { passive: true });
+        mobileNav.addEventListener('touchend', handleTouchEnd, { passive: true });
 
         // Close menu when clicking on nav links
         mobileNavLinks.forEach(link => {
@@ -138,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 block: 'start'
                             });
                             updateActiveMenu();
-                        }, 100);
+                        }, 150);
                     }
                 } else {
                     closeMobileNav();
@@ -159,6 +210,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 closeMobileNav();
             }
         });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                closeMobileNav();
+            }
+        });
+
+        // Prevent scroll when menu is open (optional)
+        function preventScroll(e) {
+            if (mobileNav.classList.contains('active')) {
+                e.preventDefault();
+            }
+        }
+
+        // Add scroll prevention on mobile when menu is open
+        document.addEventListener('touchmove', preventScroll, { passive: false });
     }
     initMobileNav();
 
