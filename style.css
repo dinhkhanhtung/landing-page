@@ -501,20 +501,22 @@ footer {
 
 @media (max-width: 600px) {
     .main-header {
-        position: sticky;
+        position: relative;
         top: 0;
+        box-shadow: 0 2px 8px rgba(30, 136, 229, 0.10);
     }
 
     .nav-container {
         flex-direction: column;
         gap: 8px;
-        padding: 8px 0;
+        padding: 12px 0;
     }
 
     .main-nav {
         flex-wrap: wrap;
         justify-content: center;
         gap: 8px;
+        margin-top: 8px;
     }
 
     .nav-cta {
