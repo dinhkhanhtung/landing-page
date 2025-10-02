@@ -89,102 +89,78 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', updateActiveMenu);
     updateActiveMenu();
 
-    // Simple Mobile Menu Functionality
-    function initMobileMenu() {
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-        const mobileMenu = document.getElementById('mobileMenu');
+    // New Simple Mobile Navigation
+    function initMobileNav() {
+        const mobileToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
         const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-        const mobileMenuClose = document.getElementById('mobileMenuClose');
 
-        if (!mobileMenuBtn || !mobileMenuOverlay || !mobileMenu) return;
+        if (!mobileToggle || !mobileNav) return;
 
-        // Toggle mobile menu
-        function toggleMobileMenu() {
-            const isActive = mobileMenu.classList.contains('active');
+        // Toggle mobile navigation
+        function toggleMobileNav() {
+            const isActive = mobileNav.classList.contains('active');
+
             if (isActive) {
-                closeMobileMenu();
+                closeMobileNav();
             } else {
-                openMobileMenu();
+                openMobileNav();
             }
         }
 
-        function openMobileMenu() {
-            mobileMenuBtn.classList.add('active');
-            mobileMenuOverlay.classList.add('active');
-            mobileMenu.classList.add('active');
-            document.body.classList.add('mobile-menu-open');
-
-            // Prevent body scroll
-            document.body.style.overflow = 'hidden';
+        function openMobileNav() {
+            mobileToggle.classList.add('active');
+            mobileNav.classList.add('active');
         }
 
-        function closeMobileMenu() {
-            mobileMenuBtn.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            document.body.classList.remove('mobile-menu-open');
-
-            // Restore body scroll
-            document.body.style.overflow = '';
+        function closeMobileNav() {
+            mobileToggle.classList.remove('active');
+            mobileNav.classList.remove('active');
         }
 
         // Event listeners
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-
-        // Close menu when clicking on overlay
-        mobileMenuOverlay.addEventListener('click', function (e) {
-            if (e.target === mobileMenuOverlay) {
-                closeMobileMenu();
-            }
-        });
-
-        // Close menu when clicking on close button
-        if (mobileMenuClose) {
-            mobileMenuClose.addEventListener('click', closeMobileMenu);
-        }
+        mobileToggle.addEventListener('click', toggleMobileNav);
 
         // Close menu when clicking on nav links
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
                 const href = link.getAttribute('href');
 
                 // If it's a hash link, scroll to section
                 if (href && href.startsWith('#')) {
+                    e.preventDefault();
                     const target = document.querySelector(href);
                     if (target) {
-                        closeMobileMenu();
+                        closeMobileNav();
                         setTimeout(() => {
                             target.scrollIntoView({
                                 behavior: 'smooth',
                                 block: 'start'
                             });
                             updateActiveMenu();
-                        }, 300);
+                        }, 100);
                     }
                 } else {
-                    // For non-hash links, just close the menu
-                    closeMobileMenu();
+                    closeMobileNav();
                 }
             });
         });
 
-        // Close menu on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-                closeMobileMenu();
+        // Close menu on window resize if it gets too wide
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900 && mobileNav.classList.contains('active')) {
+                closeMobileNav();
             }
         });
 
-        // Close menu on window resize if it gets too wide
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 900 && mobileMenu.classList.contains('active')) {
-                closeMobileMenu();
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileToggle.contains(e.target) && !mobileNav.contains(e.target)) {
+                closeMobileNav();
             }
         });
     }
-    initMobileMenu();
+    initMobileNav();
 
     // Testimonials Carousel/Slider JS - Hiển thị 2 đánh giá trên desktop, 1 trên mobile
     function initTestimonialCarousel() {
