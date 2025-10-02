@@ -7,9 +7,6 @@
     --text: #222;
     --white: #fff;
     --gray: #e0e0e0;
-    --success: #4caf50;
-    --warning: #ff9800;
-    --error: #f44336;
 }
 
 * {
@@ -391,25 +388,6 @@ footer {
     margin-top: 2px;
     margin-bottom: 6px;
     font-weight: 400;
-}
-
-/* Skip Navigation Links */
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 6px;
-    background: var(--primary);
-    color: var(--white);
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 600;
-    z-index: 1000;
-    transition: top 0.3s;
-}
-
-.skip-link:focus {
-    top: 6px;
 }
 
 /* Header & Navigation */
@@ -1383,3 +1361,5 @@ footer {
         height: 12px;
     }
 }
+
+
