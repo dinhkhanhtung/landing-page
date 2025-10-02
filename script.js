@@ -198,6 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const total = items.length;
         let current = 0;
         let intervalId;
+        let isUserInteracting = false;
 
         function getVisibleCount() {
             return window.innerWidth <= 700 ? 1 : 2;
@@ -258,16 +259,49 @@ document.addEventListener('DOMContentLoaded', function () {
             updateSliderPosition();
         }
         function resetAutoSlide() {
+            if (isUserInteracting) return;
             clearInterval(intervalId);
             intervalId = setInterval(next, 4000);
         }
+
+        function pauseAutoSlide() {
+            isUserInteracting = true;
+            clearInterval(intervalId);
+        }
+
+        function resumeAutoSlide() {
+            isUserInteracting = false;
+            resetAutoSlide();
+        }
+
         renderDots();
         updateSliderPosition();
         intervalId = setInterval(next, 4000);
-        slider.addEventListener('mouseenter', () => clearInterval(intervalId));
-        slider.addEventListener('mouseleave', resetAutoSlide);
-        if (leftBtn) leftBtn.addEventListener('click', prev);
-        if (rightBtn) rightBtn.addEventListener('click', next);
+
+        // Pause auto-slide on user interaction
+        slider.addEventListener('mouseenter', pauseAutoSlide);
+        slider.addEventListener('mouseleave', resumeAutoSlide);
+
+        // Event listeners for controls
+        if (leftBtn) leftBtn.addEventListener('click', () => {
+            pauseAutoSlide();
+            prev();
+            setTimeout(resumeAutoSlide, 3000); // Resume after 3 seconds
+        });
+
+        if (rightBtn) rightBtn.addEventListener('click', () => {
+            pauseAutoSlide();
+            next();
+            setTimeout(resumeAutoSlide, 3000); // Resume after 3 seconds
+        });
+
+        // Pause on dot click
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('.testimonial-dots button')) {
+                pauseAutoSlide();
+                setTimeout(resumeAutoSlide, 3000);
+            }
+        });
         window.addEventListener('resize', () => {
             renderDots();
             updateSliderPosition();

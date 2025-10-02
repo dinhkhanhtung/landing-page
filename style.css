@@ -640,6 +640,7 @@ footer .container {
         overflow: hidden;
         position: fixed;
         width: 100%;
+        max-width: 100%;
     }
 }
 
@@ -686,6 +687,25 @@ footer .container {
     opacity: 1;
     visibility: visible;
     display: block;
+}
+
+/* Ensure no horizontal scroll on mobile */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Performance optimizations */
+* {
+    box-sizing: border-box;
+}
+
+/* Improve font rendering */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 .mobile-menu {
@@ -1534,6 +1554,14 @@ footer .container {
         right: 10px;
         bottom: 12px;
         padding: 10px 16px;
+        font-size: 1rem;
+    }
+
+    .back-to-top {
+        right: 16px;
+        bottom: 80px;
+        width: 44px;
+        height: 44px;
         font-size: 1rem;
     }
 }
