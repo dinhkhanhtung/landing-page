@@ -177,4 +177,37 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     initTestimonialCarousel();
+
+    // Back to Top Button
+    function initBackToTop() {
+        const backToTopBtn = document.querySelector('.back-to-top');
+        if (!backToTopBtn) return;
+
+        // Hiển thị/ẩn nút dựa trên scroll position
+        function toggleBackToTop() {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        }
+
+        // Smooth scroll về đầu trang
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Sự kiện scroll
+        window.addEventListener('scroll', toggleBackToTop);
+
+        // Sự kiện click
+        backToTopBtn.addEventListener('click', scrollToTop);
+
+        // Khởi tạo trạng thái ban đầu
+        toggleBackToTop();
+    }
+    initBackToTop();
 });
