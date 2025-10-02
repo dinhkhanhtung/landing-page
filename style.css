@@ -972,6 +972,42 @@ footer {
     }
 }
 
+/* Phone Icon Shake Animation */
+@keyframes phoneShake {
+    0%, 100% { transform: rotate(0deg); }
+    10% { transform: rotate(-5deg); }
+    20% { transform: rotate(5deg); }
+    30% { transform: rotate(-5deg); }
+    40% { transform: rotate(5deg); }
+    50% { transform: rotate(0deg); }
+}
+
+/* Contact Info Phone Icon */
+.contact-info .fas.fa-phone {
+    animation: phoneShake 2s ease-in-out;
+    animation-delay: 3s;
+    animation-iteration-count: infinite;
+    transition: transform 0.2s;
+}
+
+.contact-info .fas.fa-phone:hover {
+    animation-duration: 0.5s;
+    animation-delay: 0s;
+}
+
+/* Sticky CTA Phone Icon */
+.sticky-cta .fas.fa-phone {
+    animation: phoneShake 2s ease-in-out;
+    animation-delay: 5s;
+    animation-iteration-count: infinite;
+    transition: transform 0.2s;
+}
+
+.sticky-cta:hover .fas.fa-phone {
+    animation-duration: 0.5s;
+    animation-delay: 0s;
+}
+
 /* Sticky CTA */
 .sticky-cta {
     position: fixed;
