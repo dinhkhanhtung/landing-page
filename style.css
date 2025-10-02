@@ -619,10 +619,14 @@ footer .container {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
-    gap: 4px;
+    padding: 6px;
+    gap: 3px;
     z-index: 101;
     position: relative;
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Show hamburger menu on tablet and mobile */
