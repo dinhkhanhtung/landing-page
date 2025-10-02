@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const href = link.getAttribute('href');
 
                 // If it's a hash link, scroll to section
-                if (href.startsWith('#')) {
+                if (href && href.startsWith('#')) {
                     const target = document.querySelector(href);
                     if (target) {
                         closeMobileMenu();
@@ -145,6 +145,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             updateActiveMenu();
                         }, 300);
                     }
+                } else {
+                    // For non-hash links, just close the menu
+                    closeMobileMenu();
                 }
             });
         });
