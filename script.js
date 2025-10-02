@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateActiveMenu() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.main-nav a');
-        
+
         let current = '';
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     behavior: 'smooth',
                     block: 'start'
                 });
-                
+
                 // Update active state after scroll
                 setTimeout(() => {
                     updateActiveMenu();
@@ -111,15 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function openMobileMenu() {
             mobileMenuBtn.classList.add('active');
-            mobileMenu.style.display = 'block'; // Show menu first
-            mobileMenuOverlay.style.display = 'block';
-            
-            // Small delay to ensure display is applied before adding active class
-            setTimeout(() => {
-                mobileMenu.classList.add('active');
-                mobileMenuOverlay.classList.add('active');
-            }, 10);
-            
+            mobileMenuOverlay.classList.add('active');
+            mobileMenu.classList.add('active');
             document.body.classList.add('mobile-menu-open');
 
             // Prevent body scroll
@@ -132,12 +125,6 @@ document.addEventListener('DOMContentLoaded', function () {
             mobileMenu.classList.remove('active');
             document.body.classList.remove('mobile-menu-open');
 
-            // Hide menu after animation completes
-            setTimeout(() => {
-                mobileMenuOverlay.style.display = 'none';
-                mobileMenu.style.display = 'none';
-            }, 300);
-
             // Restore body scroll
             document.body.style.overflow = '';
         }
@@ -146,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
         // Close menu when clicking on overlay
-        mobileMenuOverlay.addEventListener('click', function(e) {
+        mobileMenuOverlay.addEventListener('click', function (e) {
             if (e.target === mobileMenuOverlay) {
                 closeMobileMenu();
             }
