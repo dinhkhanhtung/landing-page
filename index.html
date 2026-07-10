@@ -77,9 +77,34 @@
         content="Dịch vụ Digital Marketing, Công nghệ, Thiết kế Website, Quảng cáo Facebook, AI Agent, Đinh Khánh Tùng - Giải pháp số tối ưu cho doanh nghiệp và cá nhân.">
     <meta property="twitter:image" content="https://dinhkhanhtung.com/avatar.jpg">
     <meta property="twitter:image:alt" content="Đinh Khánh Tùng - Digital Marketing & Technology Consultant">
+    <meta http-equiv="refresh" content="3;url=https://dinhkhanhtung.vercel.app/">
 </head>
 
 <body>
+    <!-- Auto Redirect Overlay -->
+    <div id="redirect-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#fbfaf8;z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;text-align:center;padding:20px;color:#126c3d;">
+        <div style="background:#fff;padding:40px;border-radius:24px;box-shadow:0 20px 40px rgba(0,0,0,0.08);max-width:400px;width:100%;box-sizing:border-box;">
+            <div style="font-size:48px;margin-bottom:20px;">💚</div>
+            <h2 style="margin:0 0 10px 0;font-size:22px;font-weight:700;">ĐÃ CHUYỂN ĐỊA CHỈ</h2>
+            <p style="color:#555;font-size:14px;margin:0 0 20px 0;line-height:1.6;">Trang web của Đinh Khánh Tùng đã được cập nhật sang địa chỉ mới tiện lợi và đầy đủ hơn.</p>
+            <div style="font-weight:700;font-size:16px;background:#f3efea;padding:12px;border-radius:12px;margin-bottom:20px;word-break:break-all;">dinhkhanhtung.vercel.app</div>
+            <p style="color:#888;font-size:12px;margin:0 0 20px 0;">Đang tự động chuyển hướng sau <span id="countdown-timer">3</span> giây...</p>
+            <a href="https://dinhkhanhtung.vercel.app/" style="display:inline-block;background:#126c3d;color:#fff;text-decoration:none;padding:12px 30px;border-radius:30px;font-weight:700;font-size:14px;transition:all 0.3s;box-shadow:0 4px 12px rgba(18,108,61,0.2);">Đi tới trang mới ngay</a>
+        </div>
+    </div>
+    <script>
+        let seconds = 3;
+        const timerEl = document.getElementById('countdown-timer');
+        const interval = setInterval(() => {
+            seconds--;
+            if(timerEl) timerEl.textContent = seconds;
+            if(seconds <= 0) {
+                clearInterval(interval);
+                window.location.href = "https://dinhkhanhtung.vercel.app/";
+            }
+        }, 1000);
+    </script>
+
     <!-- Skip Navigation Links -->
     <a href="#main-content" class="skip-link">Bỏ qua điều hướng</a>
 
